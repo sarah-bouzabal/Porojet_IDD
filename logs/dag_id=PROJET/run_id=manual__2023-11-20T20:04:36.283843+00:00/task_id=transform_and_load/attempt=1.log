@@ -1,0 +1,40 @@
+[2023-11-20T20:04:38.156+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet.transform_and_load manual__2023-11-20T20:04:36.283843+00:00 [queued]>
+[2023-11-20T20:04:38.167+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet.transform_and_load manual__2023-11-20T20:04:36.283843+00:00 [queued]>
+[2023-11-20T20:04:38.167+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-20T20:04:38.182+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform_and_load> on 2023-11-20 20:04:36.283843+00:00
+[2023-11-20T20:04:38.188+0000] {standard_task_runner.py:57} INFO - Started process 236 to run task
+[2023-11-20T20:04:38.191+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet', 'transform_and_load', 'manual__2023-11-20T20:04:36.283843+00:00', '--job-id', '6', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmpdnpmje01']
+[2023-11-20T20:04:38.194+0000] {standard_task_runner.py:85} INFO - Job 6: Subtask transform_and_load
+[2023-11-20T20:04:38.240+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet.transform_and_load manual__2023-11-20T20:04:36.283843+00:00 [running]> on host 690e0b7082ad
+[2023-11-20T20:04:38.451+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet' AIRFLOW_CTX_TASK_ID='transform_and_load' AIRFLOW_CTX_EXECUTION_DATE='2023-11-20T20:04:36.283843+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-20T20:04:36.283843+00:00'
+[2023-11-20T20:04:38.617+0000] {warnings.py:109} WARNING - /opt/***/dags/ETL.py:16: DtypeWarning: Columns (0) have mixed types. Specify dtype option on import or set low_memory=False.
+  df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';')
+
+[2023-11-20T20:04:38.639+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 3653, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Code_tranches_dage'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ETL.py", line 27, in data_transform_and_load
+    df_tranches_dage ['Code_tranches_dage'] = df_tranches_dage['Code_tranches_dage'].astype(int)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 3655, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Code_tranches_dage'
+[2023-11-20T20:04:38.651+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=Projet, task_id=transform_and_load, execution_date=20231120T200436, start_date=20231120T200438, end_date=20231120T200438
+[2023-11-20T20:04:38.665+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 6 for task transform_and_load ('Code_tranches_dage'; 236)
+[2023-11-20T20:04:38.686+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-20T20:04:38.702+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

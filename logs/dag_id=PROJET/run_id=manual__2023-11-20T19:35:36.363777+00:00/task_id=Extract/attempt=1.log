@@ -1,0 +1,39 @@
+[2023-11-20T19:35:38.072+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet.Extract manual__2023-11-20T19:35:36.363777+00:00 [queued]>
+[2023-11-20T19:35:38.083+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet.Extract manual__2023-11-20T19:35:36.363777+00:00 [queued]>
+[2023-11-20T19:35:38.084+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-20T19:35:38.097+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): Extract> on 2023-11-20 19:35:36.363777+00:00
+[2023-11-20T19:35:38.103+0000] {standard_task_runner.py:57} INFO - Started process 327 to run task
+[2023-11-20T19:35:38.105+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet', 'Extract', 'manual__2023-11-20T19:35:36.363777+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmpwxhb4bid']
+[2023-11-20T19:35:38.108+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask Extract
+[2023-11-20T19:35:38.155+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet.Extract manual__2023-11-20T19:35:36.363777+00:00 [running]> on host 272b4ce7c03d
+[2023-11-20T19:35:38.338+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet' AIRFLOW_CTX_TASK_ID='Extract' AIRFLOW_CTX_EXECUTION_DATE='2023-11-20T19:35:36.363777+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-20T19:35:36.363777+00:00'
+[2023-11-20T19:35:38.502+0000] {warnings.py:109} WARNING - /opt/***/dags/ETL.py:16: DtypeWarning: Columns (0) have mixed types. Specify dtype option on import or set low_memory=False.
+  df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';', dtype={'Code tranches d\'age': str})
+
+[2023-11-20T19:35:38.519+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ETL.py", line 19, in data_transform_and_load
+    df_age = pd.read_csv(csv_file_path_age, delimiter=",", dtype = {'Code_tranches_age'})
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 577, in _read
+    parser = TextFileReader(filepath_or_buffer, **kwds)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1407, in __init__
+    self._engine = self._make_engine(f, self.engine)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1679, in _make_engine
+    return mapping[engine](f, **self.options)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 87, in __init__
+    kwds["dtype"] = ensure_dtype_objs(kwds.get("dtype", None))
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 422, in ensure_dtype_objs
+    return pandas_dtype(dtype)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/dtypes/common.py", line 1691, in pandas_dtype
+    npdtype = np.dtype(dtype)
+TypeError: Cannot interpret '{'Code_tranches_age'}' as a data type
+[2023-11-20T19:35:38.528+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=Projet, task_id=Extract, execution_date=20231120T193536, start_date=20231120T193538, end_date=20231120T193538
+[2023-11-20T19:35:38.538+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 7 for task Extract (Cannot interpret '{'Code_tranches_age'}' as a data type; 327)
+[2023-11-20T19:35:38.560+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-20T19:35:38.574+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,40 @@
+[2023-11-20T20:00:53.619+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet.Extract manual__2023-11-20T20:00:51.881018+00:00 [queued]>
+[2023-11-20T20:00:53.627+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet.Extract manual__2023-11-20T20:00:51.881018+00:00 [queued]>
+[2023-11-20T20:00:53.629+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-20T20:00:53.772+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): Extract> on 2023-11-20 20:00:51.881018+00:00
+[2023-11-20T20:00:53.776+0000] {standard_task_runner.py:57} INFO - Started process 171 to run task
+[2023-11-20T20:00:53.779+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet', 'Extract', 'manual__2023-11-20T20:00:51.881018+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmptuwk33um']
+[2023-11-20T20:00:53.782+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask Extract
+[2023-11-20T20:00:53.821+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet.Extract manual__2023-11-20T20:00:51.881018+00:00 [running]> on host 690e0b7082ad
+[2023-11-20T20:00:53.874+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet' AIRFLOW_CTX_TASK_ID='Extract' AIRFLOW_CTX_EXECUTION_DATE='2023-11-20T20:00:51.881018+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-20T20:00:51.881018+00:00'
+[2023-11-20T20:00:54.041+0000] {warnings.py:109} WARNING - /opt/***/dags/ETL.py:16: DtypeWarning: Columns (0) have mixed types. Specify dtype option on import or set low_memory=False.
+  df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';')
+
+[2023-11-20T20:00:54.067+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 3653, in get_loc
+    return self._engine.get_loc(casted_key)
+  File "pandas/_libs/index.pyx", line 147, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/index.pyx", line 176, in pandas._libs.index.IndexEngine.get_loc
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7080, in pandas._libs.hashtable.PyObjectHashTable.get_item
+  File "pandas/_libs/hashtable_class_helper.pxi", line 7088, in pandas._libs.hashtable.PyObjectHashTable.get_item
+KeyError: 'Code_tranches_dage'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ETL.py", line 27, in data_transform_and_load
+    df_tranches_dage ['Code_tranches_dage'] = df_tranches_dage['Code_tranches_dage'].astype(int)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/frame.py", line 3761, in __getitem__
+    indexer = self.columns.get_loc(key)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/indexes/base.py", line 3655, in get_loc
+    raise KeyError(key) from err
+KeyError: 'Code_tranches_dage'
+[2023-11-20T20:00:54.080+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=Projet, task_id=Extract, execution_date=20231120T200051, start_date=20231120T200053, end_date=20231120T200054
+[2023-11-20T20:00:54.089+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 3 for task Extract ('Code_tranches_dage'; 171)
+[2023-11-20T20:00:54.113+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-20T20:00:54.130+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
