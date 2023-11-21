@@ -1,0 +1,22 @@
+[2023-11-21T16:47:53.625+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet_IDD.transform_and_load manual__2023-11-21T16:47:49.753800+00:00 [queued]>
+[2023-11-21T16:47:53.634+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet_IDD.transform_and_load manual__2023-11-21T16:47:49.753800+00:00 [queued]>
+[2023-11-21T16:47:53.635+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-21T16:47:53.646+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform_and_load> on 2023-11-21 16:47:49.753800+00:00
+[2023-11-21T16:47:53.652+0000] {standard_task_runner.py:57} INFO - Started process 1155 to run task
+[2023-11-21T16:47:53.655+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet_IDD', 'transform_and_load', 'manual__2023-11-21T16:47:49.753800+00:00', '--job-id', '44', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmpe0e2y56w']
+[2023-11-21T16:47:53.658+0000] {standard_task_runner.py:85} INFO - Job 44: Subtask transform_and_load
+[2023-11-21T16:47:53.694+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet_IDD.transform_and_load manual__2023-11-21T16:47:49.753800+00:00 [running]> on host a27ca4debaad
+[2023-11-21T16:47:53.865+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet_IDD' AIRFLOW_CTX_TASK_ID='transform_and_load' AIRFLOW_CTX_EXECUTION_DATE='2023-11-21T16:47:49.753800+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-21T16:47:49.753800+00:00'
+[2023-11-21T16:47:53.997+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ETL.py", line 33, in transform_and_load
+    df_urgences, df_tranches_dage, df_departements = task_instance.xcom_pull(task_ids='extract_data')
+ValueError: too many values to unpack (expected 3)
+[2023-11-21T16:47:54.012+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=Projet_IDD, task_id=transform_and_load, execution_date=20231121T164749, start_date=20231121T164753, end_date=20231121T164754
+[2023-11-21T16:47:54.022+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 44 for task transform_and_load (too many values to unpack (expected 3); 1155)
+[2023-11-21T16:47:54.070+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-21T16:47:54.089+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

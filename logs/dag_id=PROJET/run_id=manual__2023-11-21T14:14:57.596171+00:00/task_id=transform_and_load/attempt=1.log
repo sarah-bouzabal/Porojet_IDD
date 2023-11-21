@@ -1,0 +1,16 @@
+[2023-11-21T14:15:00.859+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet.transform_and_load manual__2023-11-21T14:14:57.596171+00:00 [queued]>
+[2023-11-21T14:15:00.867+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet.transform_and_load manual__2023-11-21T14:14:57.596171+00:00 [queued]>
+[2023-11-21T14:15:00.868+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-21T14:15:00.879+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform_and_load> on 2023-11-21 14:14:57.596171+00:00
+[2023-11-21T14:15:00.885+0000] {standard_task_runner.py:57} INFO - Started process 1413 to run task
+[2023-11-21T14:15:00.888+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet', 'transform_and_load', 'manual__2023-11-21T14:14:57.596171+00:00', '--job-id', '13', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmp375rko18']
+[2023-11-21T14:15:00.891+0000] {standard_task_runner.py:85} INFO - Job 13: Subtask transform_and_load
+[2023-11-21T14:15:00.928+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet.transform_and_load manual__2023-11-21T14:14:57.596171+00:00 [running]> on host 0fbfe6bcfb8c
+[2023-11-21T14:15:01.120+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet' AIRFLOW_CTX_TASK_ID='transform_and_load' AIRFLOW_CTX_EXECUTION_DATE='2023-11-21T14:14:57.596171+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-21T14:14:57.596171+00:00'
+[2023-11-21T14:15:01.303+0000] {warnings.py:109} WARNING - /opt/***/dags/ETL.py:16: DtypeWarning: Columns (0) have mixed types. Specify dtype option on import or set low_memory=False.
+  df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';')
+
+[2023-11-21T14:15:01.338+0000] {python.py:194} INFO - Done. Returned value was: None
+[2023-11-21T14:15:01.345+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=Projet, task_id=transform_and_load, execution_date=20231121T141457, start_date=20231121T141500, end_date=20231121T141501
+[2023-11-21T14:15:01.383+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2023-11-21T14:15:01.396+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,8 +1,8 @@
-﻿Code_tranches_age,Age
-0,tous_âges
-1,0-4_ans
-2,5-14_ans
-3,15-44_ans
-4,45-74_ans
-5,65-74_ans
-6,75ans_ou_plus
+﻿Code tranches;age
+0;tous ages
+A;0-4 ans
+B;5-14 ans
+C;15-44 ans
+D;45-64 ans
+E;65-74 ans
+F;75 et plus

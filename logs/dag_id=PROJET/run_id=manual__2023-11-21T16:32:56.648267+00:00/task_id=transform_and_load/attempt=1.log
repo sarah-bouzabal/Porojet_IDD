@@ -1,0 +1,40 @@
+[2023-11-21T16:32:59.298+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet.transform_and_load manual__2023-11-21T16:32:56.648267+00:00 [queued]>
+[2023-11-21T16:32:59.308+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet.transform_and_load manual__2023-11-21T16:32:56.648267+00:00 [queued]>
+[2023-11-21T16:32:59.309+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-21T16:32:59.321+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform_and_load> on 2023-11-21 16:32:56.648267+00:00
+[2023-11-21T16:32:59.325+0000] {standard_task_runner.py:57} INFO - Started process 803 to run task
+[2023-11-21T16:32:59.328+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet', 'transform_and_load', 'manual__2023-11-21T16:32:56.648267+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmpzi4ntx5_']
+[2023-11-21T16:32:59.331+0000] {standard_task_runner.py:85} INFO - Job 22: Subtask transform_and_load
+[2023-11-21T16:32:59.372+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet.transform_and_load manual__2023-11-21T16:32:56.648267+00:00 [running]> on host a27ca4debaad
+[2023-11-21T16:32:59.555+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet' AIRFLOW_CTX_TASK_ID='transform_and_load' AIRFLOW_CTX_EXECUTION_DATE='2023-11-21T16:32:56.648267+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-21T16:32:56.648267+00:00'
+[2023-11-21T16:32:59.606+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "pandas/_libs/parsers.pyx", line 1131, in pandas._libs.parsers.TextReader._convert_tokens
+TypeError: Cannot cast array data from dtype('O') to dtype('int64') according to the rule 'safe'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ETL.py", line 16, in data_transform_and_load
+    df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';', dtype={'dep': int})
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 912, in read_csv
+    return _read(filepath_or_buffer, kwds)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 583, in _read
+    return parser.read(nrows)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/readers.py", line 1704, in read
+    ) = self._engine.read(  # type: ignore[attr-defined]
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/parsers/c_parser_wrapper.py", line 234, in read
+    chunks = self._reader.read_low_memory(nrows)
+  File "pandas/_libs/parsers.pyx", line 814, in pandas._libs.parsers.TextReader.read_low_memory
+  File "pandas/_libs/parsers.pyx", line 891, in pandas._libs.parsers.TextReader._read_rows
+  File "pandas/_libs/parsers.pyx", line 1036, in pandas._libs.parsers.TextReader._convert_column_data
+  File "pandas/_libs/parsers.pyx", line 1137, in pandas._libs.parsers.TextReader._convert_tokens
+ValueError: invalid literal for int() with base 10: '2A'
+[2023-11-21T16:32:59.619+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=Projet, task_id=transform_and_load, execution_date=20231121T163256, start_date=20231121T163259, end_date=20231121T163259
+[2023-11-21T16:32:59.628+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 22 for task transform_and_load (invalid literal for int() with base 10: '2A'; 803)
+[2023-11-21T16:32:59.662+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-21T16:32:59.675+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

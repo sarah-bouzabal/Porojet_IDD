@@ -1,0 +1,54 @@
+[2023-11-21T20:58:09.359+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet_IDD.extract_and_transform manual__2023-11-21T20:58:07.760949+00:00 [queued]>
+[2023-11-21T20:58:09.371+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet_IDD.extract_and_transform manual__2023-11-21T20:58:07.760949+00:00 [queued]>
+[2023-11-21T20:58:09.372+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-21T20:58:09.388+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): extract_and_transform> on 2023-11-21 20:58:07.760949+00:00
+[2023-11-21T20:58:09.393+0000] {standard_task_runner.py:57} INFO - Started process 4483 to run task
+[2023-11-21T20:58:09.397+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet_IDD', 'extract_and_transform', 'manual__2023-11-21T20:58:07.760949+00:00', '--job-id', '143', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmpu61c397d']
+[2023-11-21T20:58:09.400+0000] {standard_task_runner.py:85} INFO - Job 143: Subtask extract_and_transform
+[2023-11-21T20:58:09.470+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet_IDD.extract_and_transform manual__2023-11-21T20:58:07.760949+00:00 [running]> on host 726cce66553f
+[2023-11-21T20:58:09.708+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet_IDD' AIRFLOW_CTX_TASK_ID='extract_and_transform' AIRFLOW_CTX_EXECUTION_DATE='2023-11-21T20:58:07.760949+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-21T20:58:07.760949+00:00'
+[2023-11-21T20:58:09.945+0000] {logging_mixin.py:151} INFO -   Code tranches         age
+0             0   tous ages
+1             A     0-4 ans
+2             B    5-14 ans
+3             C   15-44 ans
+4             D   45-64 ans
+5             E   65-74 ans
+6             F  75 et plus
+[2023-11-21T20:58:10.087+0000] {python.py:194} INFO - Done. Returned value was: (     num_dep                 dep_name                 region_name
+0          1                      Ain        Auvergne-Rhône-Alpes
+1          2                    Aisne             Hauts-de-France
+2          3                   Allier        Auvergne-Rhône-Alpes
+3          4  Alpes-de-Haute-Provence  Provence-Alpes-Côte d'Azur
+4          5             Hautes-Alpes  Provence-Alpes-Côte d'Azur
+..       ...                      ...                         ...
+96       971               Guadeloupe                  Guadeloupe
+97       972               Martinique                  Martinique
+98       973                   Guyane                      Guyane
+99       974               La Réunion                  La Réunion
+100      976                  Mayotte                     Mayotte
+
+[101 rows x 3 columns],         dep date_de_passage  ...  nbre_acte_tot_h  nbre_acte_tot_f
+0         1      2022-12-26  ...              NaN              NaN
+1         1      2022-12-26  ...              NaN              NaN
+2         1      2022-12-26  ...              NaN              NaN
+3         1      2022-12-26  ...              NaN              NaN
+4         1      2022-12-26  ...              NaN              NaN
+...     ...             ...  ...              ...              ...
+214215  976      2023-10-24  ...              NaN              NaN
+214216  976      2023-10-24  ...              NaN              NaN
+214217  976      2023-10-24  ...              NaN              NaN
+214218  976      2023-10-24  ...              NaN              NaN
+214219  976      2023-10-24  ...              NaN              NaN
+
+[212928 rows x 18 columns],    Code_tranches_age         age
+0                  0   tous ages
+1                  1     0-4 ans
+2                  2    5-14 ans
+3                  3   15-44 ans
+4                  4   45-64 ans
+5                  5   65-74 ans
+6                  6  75 et plus)
+[2023-11-21T20:58:10.513+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=Projet_IDD, task_id=extract_and_transform, execution_date=20231121T205807, start_date=20231121T205809, end_date=20231121T205810
+[2023-11-21T20:58:10.536+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2023-11-21T20:58:10.553+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

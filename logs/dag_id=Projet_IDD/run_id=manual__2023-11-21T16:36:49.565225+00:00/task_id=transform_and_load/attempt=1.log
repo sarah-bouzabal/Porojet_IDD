@@ -1,0 +1,22 @@
+[2023-11-21T16:36:50.516+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet_IDD.transform_and_load manual__2023-11-21T16:36:49.565225+00:00 [queued]>
+[2023-11-21T16:36:50.526+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet_IDD.transform_and_load manual__2023-11-21T16:36:49.565225+00:00 [queued]>
+[2023-11-21T16:36:50.527+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-21T16:36:50.541+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform_and_load> on 2023-11-21 16:36:49.565225+00:00
+[2023-11-21T16:36:50.547+0000] {standard_task_runner.py:57} INFO - Started process 902 to run task
+[2023-11-21T16:36:50.551+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet_IDD', 'transform_and_load', 'manual__2023-11-21T16:36:49.565225+00:00', '--job-id', '28', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmpve4tcoep']
+[2023-11-21T16:36:50.554+0000] {standard_task_runner.py:85} INFO - Job 28: Subtask transform_and_load
+[2023-11-21T16:36:50.603+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet_IDD.transform_and_load manual__2023-11-21T16:36:49.565225+00:00 [running]> on host a27ca4debaad
+[2023-11-21T16:36:50.841+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet_IDD' AIRFLOW_CTX_TASK_ID='transform_and_load' AIRFLOW_CTX_EXECUTION_DATE='2023-11-21T16:36:49.565225+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-21T16:36:49.565225+00:00'
+[2023-11-21T16:36:50.851+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ETL.py", line 31, in transform_and_load
+    df_urgences, df_tranches_dage, df_departements = task_instance.xcom_pull(task_ids='extract_data')
+TypeError: cannot unpack non-iterable NoneType object
+[2023-11-21T16:36:50.865+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=Projet_IDD, task_id=transform_and_load, execution_date=20231121T163649, start_date=20231121T163650, end_date=20231121T163650
+[2023-11-21T16:36:50.877+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 28 for task transform_and_load (cannot unpack non-iterable NoneType object; 902)
+[2023-11-21T16:36:50.924+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-21T16:36:50.940+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
