@@ -11,7 +11,7 @@ from airflow import DAG
 def extract_and_transform():
     # Spécifier le chemin vers le fichier CSV des urgences SOS médecins
     csv_file_path_sos = os.path.join(os.getenv("AIRFLOW_HOME"), "data", "donnees-urgences-SOS-medecins.csv")
-    df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';', dtype={'dep': str})
+    df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';')
 
    
     csv_file_path = os.path.expandvars("${AIRFLOW_HOME}/data/code-tranches-dage-donnees-urgences.csv")
@@ -30,8 +30,12 @@ def extract_and_transform():
     # Supprimer les lignes avec des dates invalides
     df_urgences = df_urgences.dropna(subset=['date_de_passage'])
 
-    df_urgences["dep"] = pd.to_numeric(df_urgences["dep"], errors='coerce', downcast='integer')
-    df_urgences["dep"] = df_urgences["dep"].astype('Int64')
+    #df_urgences["dep"] = pd.to_numeric(df_urgences["dep"], errors='coerce', downcast='string')
+    df_urgences["dep"] = df_urgences["dep"].astype(str)
+    #sup les colonne 
+    colonnes_a_supprimer = ['nbre_acte_corona', 'nbre_acte_tot','nbre_acte_corona_h', 'nbre_acte_corona_f','nbre_acte_tot_h','nbre_acte_tot_f']
+    df_urgences = df_urgences.drop(colonnes_a_supprimer, axis=1)
+    print(df_urgences)
     # Remplacer 'A' par les valeurs numériques 1, 2, 3, 4, 5
 
     df_tranches_dage['Code tranches'] = df_tranches_dage['Code tranches'].replace({'A': 1, 'B': 2, 'C': 3, 'D': 4, 'E': 5, 'F': 6})
@@ -39,24 +43,16 @@ def extract_and_transform():
     df_tranches_dage['Code tranches'] = df_tranches_dage['Code tranches'].astype(int)
     df_tranches_dage.rename(columns={'Code tranches': 'code_tranches_dage'}, inplace=True)
 
-    df_departements["num_dep"] = pd.to_numeric(df_departements["num_dep"], errors='coerce', downcast='integer')
-    df_departements["num_dep"] = df_departements["num_dep"].astype('Int64')
-
-    
-    return df_departements, df_urgences, df_tranches_dage
-
-
-def load_data(*args, **kwargs):
-    # Charger les DataFrames depuis la tâche extract_data
-    task_instance = kwargs['task_instance']
-    df_departements, df_urgences, df_tranches_dage = task_instance.xcom_pull(task_ids='extract_and_transform')
+    #df_departements["num_dep"] = pd.to_numeric(df_departements["num_dep"], errors='coerce', downcast='string')
+    df_departements["num_dep"] = df_departements["num_dep"].astype(str)
+    print(df_departements["num_dep"])
 
     postgres_sql_upload = PostgresHook(postgres_conn_id="postgres_connexion")
-    df_urgences.to_sql('passages_corona', postgres_sql_upload.get_sqlalchemy_engine(), if_exists='replace', chunksize=1000, index=False)
+    df_urgences.to_sql('urgences', postgres_sql_upload.get_sqlalchemy_engine(), if_exists='replace', chunksize=1000, index=False)
     df_tranches_dage.to_sql('tranches_dage', postgres_sql_upload.get_sqlalchemy_engine(), if_exists='append', chunksize=1000,index=False)
     df_departements.to_sql('departements', postgres_sql_upload.get_sqlalchemy_engine(), if_exists='replace', chunksize=1000,index=False)
-
-    return
+    
+    return 
 
 
 default_args = {
@@ -84,14 +80,11 @@ with DAG(
     )
 
     # Utiliser un PythonOperator pour appeler la fonction transform_and_load
-    load_data_task = PythonOperator(
-        task_id='load_data',
-        python_callable=load_data,
-    )
+
 
     create_key = PostgresOperator(
     task_id='create_key',
     postgres_conn_id='postgres_connexion',
     sql='sql/kly.sql'
     )
-[create_table,extract_and_transform_task]>>load_data_task>>create_key
+create_table>>extract_and_transform_task>>create_key
