@@ -8,10 +8,10 @@ from airflow.operators.python import PythonOperator
 from airflow import DAG
 
 
-def extract_and_transform():
+def extract_and_transform_laod():
     # Spécifier le chemin vers le fichier CSV des urgences SOS médecins
     csv_file_path_sos = os.path.join(os.getenv("AIRFLOW_HOME"), "data", "donnees-urgences-SOS-medecins.csv")
-    df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';')
+    df_urgences = pd.read_csv(csv_file_path_sos, delimiter=';', dtype={'dep': str})
 
    
     csv_file_path = os.path.expandvars("${AIRFLOW_HOME}/data/code-tranches-dage-donnees-urgences.csv")
@@ -69,22 +69,21 @@ with DAG(
 ) as dag:
     
     create_table = PostgresOperator(
-    task_id='create_table',
-    postgres_conn_id='postgres_connexion',
-    sql='sql/create_table.sql'
+        task_id='create_table',
+        postgres_conn_id='postgres_connexion',
+        sql='sql/create_table.sql'
     )
     # Utiliser un PythonOperator pour appeler la fonction extract_data
     extract_and_transform_task = PythonOperator(
-        task_id='extract_and_transform',
-        python_callable=extract_and_transform
+        task_id='extract_and_transform_laod',
+        python_callable=extract_and_transform_laod
     )
 
     # Utiliser un PythonOperator pour appeler la fonction transform_and_load
-
-
     create_key = PostgresOperator(
-    task_id='create_key',
-    postgres_conn_id='postgres_connexion',
-    sql='sql/kly.sql'
+        task_id='create_key',
+        postgres_conn_id='postgres_connexion',
+        sql='sql/kly.sql'
     )
+
 create_table>>extract_and_transform_task>>create_key

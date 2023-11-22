@@ -1,0 +1,62 @@
+[2023-11-22T20:00:00.859+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet_IDD.create_key manual__2023-11-22T19:59:48.418466+00:00 [queued]>
+[2023-11-22T20:00:00.867+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet_IDD.create_key manual__2023-11-22T19:59:48.418466+00:00 [queued]>
+[2023-11-22T20:00:00.868+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-22T20:00:00.879+0000] {taskinstance.py:1382} INFO - Executing <Task(PostgresOperator): create_key> on 2023-11-22 19:59:48.418466+00:00
+[2023-11-22T20:00:00.883+0000] {standard_task_runner.py:57} INFO - Started process 90 to run task
+[2023-11-22T20:00:00.886+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet_IDD', 'create_key', 'manual__2023-11-22T19:59:48.418466+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmpqqw6enei']
+[2023-11-22T20:00:00.889+0000] {standard_task_runner.py:85} INFO - Job 5: Subtask create_key
+[2023-11-22T20:00:00.930+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet_IDD.create_key manual__2023-11-22T19:59:48.418466+00:00 [running]> on host bc5709542bd8
+[2023-11-22T20:00:01.147+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet_IDD' AIRFLOW_CTX_TASK_ID='create_key' AIRFLOW_CTX_EXECUTION_DATE='2023-11-22T19:59:48.418466+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-22T19:59:48.418466+00:00'
+[2023-11-22T20:00:01.148+0000] {sql.py:274} INFO - Executing: ALTER TABLE departements
+ADD CONSTRAINT departements_num_dep_key
+UNIQUE (num_dep);
+
+ALTER TABLE tranches_dage
+ADD CONSTRAINT tranches_dage_code_tranches_dage_key
+UNIQUE (code_tranches_dage);
+
+ALTER TABLE urgences
+ADD CONSTRAINT urgences_dep_fkey
+FOREIGN KEY (dep)
+REFERENCES departements (num_dep);
+
+ALTER TABLE urgences
+ADD CONSTRAINT urgences_sursaud_cl_age_corona_fkey
+FOREIGN KEY (sursaud_cl_age_corona)
+REFERENCES tranches_dage (code_tranches_dage);
+[2023-11-22T20:00:01.156+0000] {base.py:73} INFO - Using connection ID 'postgres_connexion' for task execution.
+[2023-11-22T20:00:01.162+0000] {base.py:73} INFO - Using connection ID 'postgres_connexion' for task execution.
+[2023-11-22T20:00:01.173+0000] {sql.py:418} INFO - Running statement: ALTER TABLE departements
+ADD CONSTRAINT departements_num_dep_key
+UNIQUE (num_dep);
+
+ALTER TABLE tranches_dage
+ADD CONSTRAINT tranches_dage_code_tranches_dage_key
+UNIQUE (code_tranches_dage);
+
+ALTER TABLE urgences
+ADD CONSTRAINT urgences_dep_fkey
+FOREIGN KEY (dep)
+REFERENCES departements (num_dep);
+
+ALTER TABLE urgences
+ADD CONSTRAINT urgences_sursaud_cl_age_corona_fkey
+FOREIGN KEY (sursaud_cl_age_corona)
+REFERENCES tranches_dage (code_tranches_dage);, parameters: None
+[2023-11-22T20:00:01.186+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/operators/sql.py", line 280, in execute
+    output = hook.run(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/hooks/sql.py", line 392, in run
+    self._run_command(cur, sql_statement, parameters)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/hooks/sql.py", line 423, in _run_command
+    cur.execute(sql_statement)
+psycopg2.errors.ForeignKeyViolation: insert or update on table "urgences" violates foreign key constraint "urgences_dep_fkey"
+DETAIL:  Key (dep)=(1) is not present in table "departements".
+
+[2023-11-22T20:00:01.197+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=Projet_IDD, task_id=create_key, execution_date=20231122T195948, start_date=20231122T200000, end_date=20231122T200001
+[2023-11-22T20:00:01.213+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 5 for task create_key (insert or update on table "urgences" violates foreign key constraint "urgences_dep_fkey"
+DETAIL:  Key (dep)=(1) is not present in table "departements".
+; 90)
+[2023-11-22T20:00:01.261+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-22T20:00:01.275+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
