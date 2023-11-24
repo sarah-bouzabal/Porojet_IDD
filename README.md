@@ -30,9 +30,13 @@ Docker a été utilisé pour créer un environnement isolé, assurant la portabi
 
 DBeaver a été choisi comme outil de gestion de base de données pour explorer les données, exécuter des requêtes SQL et visualiser les résultats. Cela simplifie l'analyse des données pendant le développement.
 
+
+![Capture d'écran 2023-11-24 180359](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/e451f07a-1247-46c6-a783-0a917ead34f9)
 ### 6. Création d'un DAG Airflow
 
 Airflow a été utilisé pour automatiser le processus d'extraction, transformation et chargement (ETL). Un DAG (Directed Acyclic Graph) a été créé pour définir les dépendances entre les différentes tâches du flux de travail.
+
+![Capture d'écran 2023-11-24 192218](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/8cc5fa7c-8543-4bc7-8915-a6b2b569c40b)
 
 ### 7. Ajout de Fonctionnalités au DAG
 
@@ -52,14 +56,10 @@ Docker permet d'encapsuler l'ensemble de l'environnement de développement, gara
 
 DBeaver offre une interface utilisateur conviviale pour explorer et interagir avec différentes bases de données. C'est un outil essentiel pour comprendre la structure des données et tester des requêtes SQL.
 
-![Capture d'écran 2023-11-24 180359](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/e451f07a-1247-46c6-a783-0a917ead34f9)
-
 
 ### Airflow
 
 Airflow est un outil puissant pour la gestion des workflows et l'automatisation des tâches ETL. En définissant un DAG, les différentes étapes du processus sont orchestrées de manière efficace et planifiée.
-
-![Capture d'écran 2023-11-24 192218](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/8cc5fa7c-8543-4bc7-8915-a6b2b569c40b)
 
 
 ## Conclusion
