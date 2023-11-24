@@ -8,6 +8,11 @@ Pour répondre à cette interrogation, une approche novatrice est explorée à t
 Afin de rendre l'utilisation des données plus efficiente, l'accent est mis sur la modélisation en étoile de l'entrepôt de données. Cette approche, organisant les données dans un schéma en étoile, offre une structure permettant de simplifier la complexité des informations stockées dans un Data Warehouse.
 La modélisation en étoile d'un entrepôt de données se caractérise notamment par une table de fait. Dans cette démarche, des fichiers tels que "code-tranches-dage-donnees-urgences.csv," "donnees-urgences-SOS-medecins.csv," et "departement-region.json" représentent des sources de données clés pour alimenter cette table de fait, offrant ainsi un panorama complet pour éclairer la prise de décision dans le contexte de la gestion de la crise sanitaire.
 
+
+# Transformation 
+
+Les données actuelles présentent une complexité qui rend leur exploitation peu aisée. Afin de faciliter leur utilisation, il est nécessaire d'appliquer un ensemble spécifique de transformations. Nous débuterons par la visualisation de nos données brutes.
+
 L'exécution:
 
 ![Capture d'écran 2023-11-24 192218](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/a8ece89f-f73c-4eb4-8099-c32801001833)
