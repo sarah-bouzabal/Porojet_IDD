@@ -2,8 +2,9 @@
 
 L'exécution:
 
-![Capture d'écran 2023-11-22 210522](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/031df843-c99b-46b6-b2dc-0096f2782fe2)
+![Capture d'écran 2023-11-24 192218](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/a8ece89f-f73c-4eb4-8099-c32801001833)
+
 
 Tables:
 
-![Capture d'écran 2023-11-22 210636](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/ccb7cf96-4c7a-4b39-ab92-8f8ebb856a30)
+![Capture d'écran 2023-11-24 180359](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/b8c1a674-49a3-4abd-a5df-cc656a774641)
