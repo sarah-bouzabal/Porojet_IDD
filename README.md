@@ -21,12 +21,12 @@ En ce qui concerne les colonnes à supprimer, nous avons identifié et éliminé
 
 Enfin, pour le dataframe df_departements, nous avons converti la colonne "num_dep" en type string pour assurer une cohérence dans la manipulation des données. Le résultat final de cette étape de prétraitement a été affiché avec print(df_departements["num_dep"])
 
-L'exécution:
 
-![Capture d'écran 2023-11-24 192218](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/a8ece89f-f73c-4eb4-8099-c32801001833)
 
 # Modélisation de l'Entrepôt de Données
 La modélisation en étoile est une méthode de conception de base de données qui se caractérise par l'utilisation d'une table centrale, appelée table de faits (fact table), entourée de plusieurs tables dimensionnelles. L'idée principale est de centraliser les informations clés dans la table de faits, tandis que les tables dimensionnelles contiennent des informations descriptives qui permettent d'analyser ou de filtrer les données de la table de faits.
+
+
 ![Capture d'écran 2023-11-24 180359](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/b8c1a674-49a3-4abd-a5df-cc656a774641)  
 
 # Tests  
@@ -36,7 +36,9 @@ La modélisation en étoile est une méthode de conception de base de données q
 
  
 # Conclusion
+L'exécution:
 
+![Capture d'écran 2023-11-24 192218](https://github.com/sarah-bouzabal/Porojet_IDD/assets/96074783/a8ece89f-f73c-4eb4-8099-c32801001833)
 
 
 
