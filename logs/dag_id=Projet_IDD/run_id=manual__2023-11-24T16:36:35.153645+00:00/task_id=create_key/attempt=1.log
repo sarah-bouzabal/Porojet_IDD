@@ -1,0 +1,98 @@
+[2023-11-24T16:36:50.519+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Projet_IDD.create_key manual__2023-11-24T16:36:35.153645+00:00 [queued]>
+[2023-11-24T16:36:50.528+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Projet_IDD.create_key manual__2023-11-24T16:36:35.153645+00:00 [queued]>
+[2023-11-24T16:36:50.530+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2023-11-24T16:36:50.542+0000] {taskinstance.py:1382} INFO - Executing <Task(PostgresOperator): create_key> on 2023-11-24 16:36:35.153645+00:00
+[2023-11-24T16:36:50.548+0000] {standard_task_runner.py:57} INFO - Started process 1973 to run task
+[2023-11-24T16:36:50.551+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Projet_IDD', 'create_key', 'manual__2023-11-24T16:36:35.153645+00:00', '--job-id', '66', '--raw', '--subdir', 'DAGS_FOLDER/ETL.py', '--cfg-path', '/tmp/tmp29kovydk']
+[2023-11-24T16:36:50.554+0000] {standard_task_runner.py:85} INFO - Job 66: Subtask create_key
+[2023-11-24T16:36:50.597+0000] {task_command.py:416} INFO - Running <TaskInstance: Projet_IDD.create_key manual__2023-11-24T16:36:35.153645+00:00 [running]> on host 1697b77d64fd
+[2023-11-24T16:36:50.783+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='Projet_IDD' AIRFLOW_CTX_TASK_ID='create_key' AIRFLOW_CTX_EXECUTION_DATE='2023-11-24T16:36:35.153645+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-11-24T16:36:35.153645+00:00'
+[2023-11-24T16:36:50.784+0000] {sql.py:274} INFO - Executing: -- Ajout d'une contrainte UNIQUE sur la colonne num_dep de la table departements
+ALTER TABLE departements
+ADD CONSTRAINT departements_num_dep_key
+UNIQUE (num_dep);
+
+-- Ajout d'une contrainte FOREIGN KEY sur la colonne dep de la table urgences_hosp
+-- faisant référence à la colonne num_dep de la table departements
+ALTER TABLE urgences_hosp
+ADD CONSTRAINT urgences_hosp_dep_fkey
+FOREIGN KEY (dep)
+REFERENCES departements (num_dep);
+
+-- Ajout d'une contrainte UNIQUE sur les colonnes num_dep et date_passage de la table hospitalisation
+ALTER TABLE hospitalisation
+ADD CONSTRAINT hospitalisation_key
+UNIQUE (num_dep, date_passage);
+
+-- Ajout d'une contrainte FOREIGN KEY sur les colonnes dep et date_de_passage de la table urgences_hosp
+-- faisant référence aux colonnes num_dep et date_passage de la table hospitalisation
+ALTER TABLE urgences_hosp
+ADD CONSTRAINT urgences_hosp_hospitalisation_fkey
+FOREIGN KEY (dep, date_de_passage)
+REFERENCES hospitalisation (num_dep, date_passage);
+
+-- Ajout d'une contrainte UNIQUE sur les colonnes num_dep, code_tranches_dage et date_de_passage de la table passage_urgence
+ALTER TABLE passage_urgence
+ADD CONSTRAINT passage_urgence_key
+UNIQUE (num_dep, code_tranches_dage, date_de_passage);
+
+-- Ajout d'une contrainte FOREIGN KEY sur les colonnes dep, sursaud_cl_age_corona et date_de_passage de la table urgences_hosp
+-- faisant référence aux colonnes num_dep, code_tranches_dage et date_de_passage de la table passage_urgence
+ALTER TABLE urgences_hosp
+ADD CONSTRAINT urgences_hosp_passage_urgence_fkey
+FOREIGN KEY (dep, sursaud_cl_age_corona, date_de_passage)
+REFERENCES passage_urgence (num_dep, code_tranches_dage, date_de_passage);
+
+[2023-11-24T16:36:50.792+0000] {base.py:73} INFO - Using connection ID 'postgres_connexion' for task execution.
+[2023-11-24T16:36:50.799+0000] {base.py:73} INFO - Using connection ID 'postgres_connexion' for task execution.
+[2023-11-24T16:36:50.810+0000] {sql.py:418} INFO - Running statement: -- Ajout d'une contrainte UNIQUE sur la colonne num_dep de la table departements
+ALTER TABLE departements
+ADD CONSTRAINT departements_num_dep_key
+UNIQUE (num_dep);
+
+-- Ajout d'une contrainte FOREIGN KEY sur la colonne dep de la table urgences_hosp
+-- faisant référence à la colonne num_dep de la table departements
+ALTER TABLE urgences_hosp
+ADD CONSTRAINT urgences_hosp_dep_fkey
+FOREIGN KEY (dep)
+REFERENCES departements (num_dep);
+
+-- Ajout d'une contrainte UNIQUE sur les colonnes num_dep et date_passage de la table hospitalisation
+ALTER TABLE hospitalisation
+ADD CONSTRAINT hospitalisation_key
+UNIQUE (num_dep, date_passage);
+
+-- Ajout d'une contrainte FOREIGN KEY sur les colonnes dep et date_de_passage de la table urgences_hosp
+-- faisant référence aux colonnes num_dep et date_passage de la table hospitalisation
+ALTER TABLE urgences_hosp
+ADD CONSTRAINT urgences_hosp_hospitalisation_fkey
+FOREIGN KEY (dep, date_de_passage)
+REFERENCES hospitalisation (num_dep, date_passage);
+
+-- Ajout d'une contrainte UNIQUE sur les colonnes num_dep, code_tranches_dage et date_de_passage de la table passage_urgence
+ALTER TABLE passage_urgence
+ADD CONSTRAINT passage_urgence_key
+UNIQUE (num_dep, code_tranches_dage, date_de_passage);
+
+-- Ajout d'une contrainte FOREIGN KEY sur les colonnes dep, sursaud_cl_age_corona et date_de_passage de la table urgences_hosp
+-- faisant référence aux colonnes num_dep, code_tranches_dage et date_de_passage de la table passage_urgence
+ALTER TABLE urgences_hosp
+ADD CONSTRAINT urgences_hosp_passage_urgence_fkey
+FOREIGN KEY (dep, sursaud_cl_age_corona, date_de_passage)
+REFERENCES passage_urgence (num_dep, code_tranches_dage, date_de_passage);
+, parameters: None
+[2023-11-24T16:36:50.937+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/operators/sql.py", line 280, in execute
+    output = hook.run(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/hooks/sql.py", line 392, in run
+    self._run_command(cur, sql_statement, parameters)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/hooks/sql.py", line 423, in _run_command
+    cur.execute(sql_statement)
+psycopg2.errors.UndefinedColumn: column "code_tranches_dage" named in key does not exist
+
+[2023-11-24T16:36:50.946+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=Projet_IDD, task_id=create_key, execution_date=20231124T163635, start_date=20231124T163650, end_date=20231124T163650
+[2023-11-24T16:36:50.959+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 66 for task create_key (column "code_tranches_dage" named in key does not exist
+; 1973)
+[2023-11-24T16:36:51.005+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-11-24T16:36:51.020+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
